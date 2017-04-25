@@ -7,6 +7,7 @@ import com.collin.service.ConnDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,12 +23,17 @@ public class Controller {
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public Map<String, Object> checkUser(@RequestBody User user){
-        List list = mConnDatabase.checkUser(user.getUserId(), user.getUserPw());
-        if(list == null){
-            return new BaseController().generateFailureMsg("用户名或密码错误！");
-        }else {
-            return new BaseController().generateSuccessMsg(list);
-        }
+        Map map = new HashMap();
+        System.out.println("yes");
+        map.put("userPw",user.getUserPw());
+        System.out.println(user.getUserPw());
+        return map;
+//        List list = mConnDatabase.checkUser(user.getUserId(), user.getUserPw());
+//        if(list == null){
+//            return new BaseController().generateFailureMsg("用户名或密码错误！");
+//        }else {
+//            return new BaseController().generateSuccessMsg(list);
+//        }
     }
 
     @RequestMapping(value = "/addUser", method = {RequestMethod.GET, RequestMethod.POST})
